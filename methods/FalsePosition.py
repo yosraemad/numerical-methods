@@ -1,3 +1,3 @@
-def FalsePosition(function, precision, maxIterations):
+def false_position(fun_details):
     print("False Position")
     #TODO

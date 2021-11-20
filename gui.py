@@ -1,14 +1,15 @@
 from tkinter import *
 from tkinter.filedialog import askopenfilename
 import sys
+from function_details import FunctionDetails
 
 sys.path.append('./methods')
 
-from Bisection import Bisection
-from FalsePosition import FalsePosition
-from FixedPoint import FixedPoint
-from NewtonRaphson import NewtonRaphson
-from Secant import Secant
+from Bisection import bisection
+from FalsePosition import false_position
+from FixedPoint import fixed_point
+from NewtonRaphson import newton_raphson
+from Secant import secant
 
 root = Tk()
 
@@ -19,7 +20,7 @@ chosen.set(options[0])
 
 function = StringVar(root)
 precision = StringVar(root)
-maxIterations = StringVar(root)
+max_iterations = StringVar(root)
 
 
 def read_from_file():
@@ -30,16 +31,21 @@ def read_from_file():
 
 
 def submit():
+
+    # TODO: TAKE INITIAL GUESS FROM THE GUI
+    initial_guess = 0
+    fun_details = FunctionDetails(function, precision, max_iterations, initial_guess)
+
     if chosen.get() == 'Bisection':
-        Bisection(function, precision, maxIterations)
+        bisection(fun_details)
     elif chosen.get() == 'False Position':
-        FalsePosition(function, precision, maxIterations)
+        false_position(fun_details)
     elif chosen.get() == 'Fixed Point':
-        FixedPoint(function, precision, maxIterations)
+        fixed_point(fun_details)
     elif chosen.get() == 'Newton Raphson':
-        NewtonRaphson(function, precision, maxIterations)
+        newton_raphson(fun_details)
     elif chosen.get() == 'Secant':
-        Secant(function, precision, maxIterations)
+        secant(fun_details)
     else:
         print("Invalid")
 
@@ -59,7 +65,7 @@ Label(root, text="Precision:").grid(row=2, column=0)
 Entry(root, width=30, textvariable=precision).grid(row=2, column=1)
 
 Label(root, text="Max Number of Iterations:").grid(row=2, column=2)
-Entry(root, width=30, textvariable=maxIterations).grid(row=2, column=3)
+Entry(root, width=30, textvariable=max_iterations).grid(row=2, column=3)
 
 Button(root, text="Submit", command=submit).grid(row=3, column=0)
 
