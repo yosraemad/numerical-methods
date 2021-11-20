@@ -34,12 +34,13 @@ def submit():
 
     # TODO: TAKE INITIAL GUESS FROM THE GUI
     initial_guess = 0
-    fun_details = FunctionDetails(function, precision, max_iterations, initial_guess)
+    fun_details = FunctionDetails(function.get(), float(precision.get()), int(max_iterations.get()), initial_guess)
 
     if chosen.get() == 'Bisection':
         bisection(fun_details)
     elif chosen.get() == 'False Position':
-        false_position(fun_details)
+        xr = false_position(fun_details)
+        print(xr)
     elif chosen.get() == 'Fixed Point':
         fixed_point(fun_details)
     elif chosen.get() == 'Newton Raphson':
