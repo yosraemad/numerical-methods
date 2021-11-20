@@ -1,3 +1,3 @@
-def Bisection(function, precision, maxIterations):
+def bisection(fun_details):
     print("Bisection")
     #TODO

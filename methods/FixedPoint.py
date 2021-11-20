@@ -1,3 +1,3 @@
-def FixedPoint(function, precision, maxIterations):
+def fixed_point(fun_details):
     print("Fixed Point")
     #TODO

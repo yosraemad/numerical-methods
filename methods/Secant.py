@@ -1,3 +1,3 @@
-def Secant(function, precision, maxIterations):
+def secant(fun_details):
     print("Secant")
     #TODO
