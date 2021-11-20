@@ -8,3 +8,6 @@ class FunctionDetails:
         self.max_iterations = max_iterations
         self.initial_guess = initial_guess
 
+    def calc_function(self, x: int):
+        fun_with_val = self.function_string.replace("x", f"({x})")
+        return eval(fun_with_val)
