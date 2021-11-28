@@ -31,6 +31,9 @@ def false_position(fun_details: FunctionDetails):
 
         error = calc_relative_error(x_prev, xr)
 
+        details = "Xu: {}, Xl: {}, F(Xu): {}, F(Xl): {}".format(xu, xl, fu, fl)
+        fun_details.add_iteration_result(count, x_prev, xr, fxr, error, details)
+
         count += 1
         x_prev = xr
 

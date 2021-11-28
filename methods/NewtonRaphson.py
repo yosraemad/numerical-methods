@@ -2,7 +2,6 @@ from function_details import FunctionDetails, calc_relative_error
 
 
 def newton_raphson(fun_details: FunctionDetails):
-
     # TODO: USE THE INITIAL GUESS
     x = fun_details.initial_guess1
 
@@ -18,8 +17,8 @@ def newton_raphson(fun_details: FunctionDetails):
 
         error = calc_relative_error(x_prev, x)
 
-        print('iteration %d  xi= %0.10f  xi+1= %0.10f  f(x)= %0.10f  f`(x)= %0.10f  error= %0.10f\n' % (
-            count, x_prev, x, fx, f_dash, error))
+        details = "f`(x)= {}".format(f_dash)
+        fun_details.add_iteration_result(count, x_prev, x, fx, error, details)
 
         if fx == 0:
             return x
@@ -27,5 +26,4 @@ def newton_raphson(fun_details: FunctionDetails):
         count += 1
         x_prev = x
 
-    print(x)
     return x
