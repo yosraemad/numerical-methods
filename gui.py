@@ -29,22 +29,19 @@ initial_guess2 = DoubleVar(root)
 def read_from_file():
     filename = askopenfilename()
     file = open(filename, "r")
-    text = file.read()
+    function = file.read()
     file.close()
 
 
 def submit():
-    # TODO: TAKE INITIAL GUESS FROM THE GUI
     initial_guess = 0
     fun_details = FunctionDetails(function.get(), g_function.get(), float(precision.get()), int(max_iterations.get()),
                                   initial_guess1.get(), initial_guess2.get())
 
     if chosen.get() == 'Bisection':
         xr = bisection(fun_details)
-        print(xr)
     elif chosen.get() == 'False Position':
         xr = false_position(fun_details)
-        print(xr)
     elif chosen.get() == 'Fixed Point':
         fixed_point(fun_details)
         for i in range(fun_details.max_iterations):
@@ -71,11 +68,16 @@ g_functionButton = Button(root, text="Choose a file", command=read_from_file)
 
 
 def showInitialGuess(chosen):
-    if chosen == 'Bisection' or chosen == 'False Position' or chosen == 'Secant' or chosen == 'Fixed Point':
-        initialGuess1Label.grid(row=4, column=0)
-        initialGuess1Entry.grid(row=4, column=1)
-        initialGuess2Label.grid(row=4, column=2)
-        initialGuess2Entry.grid(row=4, column=3)
+    if chosen == 'Bisection' or chosen == 'False Position':
+        initialGuess1Label.grid(row=3, column=0)
+        initialGuess1Entry.grid(row=3, column=1)
+        initialGuess2Label.grid(row=3, column=2)
+        initialGuess2Entry.grid(row=3, column=3)
+    elif chosen == 'Newton Raphson' or chosen == 'Secant':
+        initialGuess1Label.grid(row=3, column=0)
+        initialGuess1Entry.grid(row=3, column=1)
+        initialGuess2Label.grid_remove()
+        initialGuess2Entry.grid_remove()
     else:
         initialGuess1Entry.grid_remove()
         initialGuess2Entry.grid_remove()

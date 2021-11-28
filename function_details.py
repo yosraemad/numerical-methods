@@ -1,5 +1,5 @@
 from sympy import diff, symbols
-
+from output import Output
 
 def calc_relative_error(x_old: float, x_new: float):
     return float(abs(x_new - x_old) / abs(x_new))
@@ -9,8 +9,12 @@ class FunctionDetails:
 
     def __init__(self, function_string, g_function_string, precision, max_iterations, initial_guess1=None, initial_guess2=None):
         self.function_string = function_string
+        if(precision == 0):
+            self.precision = 0.01
         self.g_function_string = g_function_string
         self.precision = precision
+        if(max_iterations == 0):
+            self.max_iterations = 20
         self.max_iterations = max_iterations
         self.initial_guess1 = initial_guess1
         self.initial_guess2 = initial_guess2
@@ -32,8 +36,9 @@ class FunctionDetails:
     def add_iteration_result(self, iteration: int, x_prev: float, x: float, fx: float, error: float, details):
         result_string = "Iteration: {}, Xi: {}, Xi+1: {}, F(Xi+1): {}, Error: {}, {}"\
             .format(iteration, x_prev, x, fx, error, details)
+        temp_arr = [iteration, x_prev, x, fx, error, details]
+        self.result_arr.append(temp_arr)
 
-        # TODO: REMOVE, This Print is only for testing purposes
-        print(result_string)
-        self.result_arr.append(result_string)
-
+    def showResult(self, method_name, execution_time):
+        result = Output(self.result_arr, method_name, execution_time)
+        result.showOutput()
