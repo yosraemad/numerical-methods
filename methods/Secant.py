@@ -1,4 +1,5 @@
 from tkinter.constants import TRUE
+from function_details import calc_relative_error
 
 
 def f(x):
@@ -24,7 +25,7 @@ def secant(fun_details):
         iteration += 1
 
         x = float(xl - f(xl) * (xu - xl) / (f(xu) - f(xl)))
-        error = float(abs(x - xold) / abs(x))
+        error = calc_relative_error(xold, x)
 
         print('iteration %d  a= %0.10f  b= %0.10f  f(a)= %0.10f  f(b)= %0.10f  x= %0.10f  error= %0.10f\n' % (
             iteration, xl, xu, f(xl), f(xu), x, error))

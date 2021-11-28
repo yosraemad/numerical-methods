@@ -1,4 +1,4 @@
-from function_details import FunctionDetails
+from function_details import FunctionDetails, calc_relative_error
 
 
 def false_position(fun_details: FunctionDetails):
@@ -29,7 +29,7 @@ def false_position(fun_details: FunctionDetails):
         else:
             xl = xr
 
-        error = abs(xr - x_prev) / abs(xr)
+        error = calc_relative_error(x_prev, xr)
 
         count += 1
         x_prev = xr
