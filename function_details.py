@@ -13,6 +13,7 @@ class FunctionDetails:
         self.max_iterations = max_iterations
         self.initial_guess1 = initial_guess1
         self.initial_guess2 = initial_guess2
+        self.result_arr = []
 
     def calc_function(self, x: float):
         fun_with_val = self.function_string
@@ -22,3 +23,10 @@ class FunctionDetails:
         f_dash = diff(self.function_string, symbols('x'))
         fun_with_val = f_dash.__str__()
         return eval(fun_with_val)
+
+    def add_iteration_result(self, iteration: int, x_prev: float, x: float, fx: float, error: float, details):
+        result_string = "Iteration: {}, Xi: {}, Xi+1: {}, F(Xi+1): {}, Error: {}, {}"\
+            .format(iteration, x_prev, x, fx, error, details)
+        print(result_string)
+        self.result_arr.append(result_string)
+
