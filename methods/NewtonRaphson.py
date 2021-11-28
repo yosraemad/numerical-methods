@@ -1,6 +1,31 @@
-from function_details import FunctionDetails
+from function_details import FunctionDetails, calc_relative_error
 
 
 def newton_raphson(fun_details: FunctionDetails):
-    fun_details.diff_f_at_point(0)
-    #TODO
+
+    # TODO: USE THE INITIAL GUESS
+    x = fun_details.initial_guess1
+
+    count = 0
+    error = 100
+    x_prev = 0.0
+    while count < fun_details.max_iterations and error > fun_details.precision:
+
+        f_dash = fun_details.diff_f_at_point(x)
+        fx = fun_details.calc_function(x)
+
+        x = x_prev - (fx / f_dash)
+
+        error = calc_relative_error(x_prev, x)
+
+        print('iteration %d  xi= %0.10f  xi+1= %0.10f  f(x)= %0.10f  f`(x)= %0.10f  error= %0.10f\n' % (
+            count, x_prev, x, fx, f_dash, error))
+
+        if fx == 0:
+            return x
+
+        count += 1
+        x_prev = x
+
+    print(x)
+    return x
