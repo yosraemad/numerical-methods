@@ -1,39 +1,31 @@
-from tkinter.constants import TRUE
-from function_details import calc_relative_error
+from function_details import calc_relative_error, FunctionDetails
 
 
-def f(x):
-    return x ** 4 - 2 * x ** 3 - 4 * x ** 2 - 4 * x + 4
-
-
-def secant(fun_details):
-    precision = float(0.01)
-    max_iterations = 10
-    print("Secant\n")
-
-    iteration = 0
-    xl = float(-1)
-    xu = float(0)
+def secant(fun_details: FunctionDetails):
+    precision = fun_details.precision
+    max_iterations = fun_details.max_iterations
+    xl = fun_details.initial_guess1
+    xu = fun_details.initial_guess2
+    fxu = fun_details.calc_function(xu)
+    fxl = fun_details.calc_function(xl)
     xold = 0
+    count = 0
+    error = 100
+    while count < max_iterations and error > precision:
 
-    while TRUE:
-
-        if f(xu) == f(xl):
+        if fxu == fxl:
             print('Error! division by zero')
             break
-
-        iteration += 1
-
-        x = float(xl - f(xl) * (xu - xl) / (f(xu) - f(xl)))
+        x = float(xl - fxl * (xu - xl) / (fxu - fxl))
+        fx = fun_details.calc_function(x)
         error = calc_relative_error(xold, x)
 
-        print('iteration %d  a= %0.10f  b= %0.10f  f(a)= %0.10f  f(b)= %0.10f  x= %0.10f  error= %0.10f\n' % (
-            iteration, xl, xu, f(xl), f(xu), x, error))
+        details = "Xu: {}, Xl: {}".format(xu, xl)
+        fun_details.add_iteration_result(count, xold, x, fx, error, details)
 
-        if iteration >= max_iterations or error < precision:
-            print('Approximate root is %0.10f' % x)
-            break
-
+        count += 1
         xl = xu
         xu = x
         xold = x
+
+    return x
