@@ -1,3 +1,6 @@
+from sympy import diff, symbols
+
+
 def calc_relative_error(x_old: float, x_new: float):
     return float(abs(x_new - x_old) / abs(x_new))
 
@@ -15,3 +18,7 @@ class FunctionDetails:
         fun_with_val = self.function_string
         return eval(fun_with_val)
 
+    def diff_f_at_point(self, x: float):
+        f_dash = diff(self.function_string, symbols('x'))
+        fun_with_val = f_dash.__str__()
+        return eval(fun_with_val)
