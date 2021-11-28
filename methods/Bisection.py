@@ -1,5 +1,6 @@
 from function_details import FunctionDetails
 
+
 def bisection(fun_details: FunctionDetails):
     xl = fun_details.initial_guess1
     xu = fun_details.initial_guess2
@@ -7,7 +8,7 @@ def bisection(fun_details: FunctionDetails):
     xr = 0.0
 
     fx = fun_details.calc_function
-    if(fx(xl) * fx(xu) >= 0):
+    if fx(xl) * fx(xu) >= 0:
         print("Initial guesses do not bracket a root")
         return
 
@@ -21,13 +22,13 @@ def bisection(fun_details: FunctionDetails):
         xr = (xl + xu) / 2.0
         fr = fx(xr)
 
-        if(fr == 0):
+        if fr == 0:
             return xr
-        if(fl * fr < 0):
+        if fl * fr < 0:
             xu = xr
         else:
             xl = xr
-        
+
         error = abs(xr - x_prev) / abs(xr)
         x_prev = xr
         count += 1

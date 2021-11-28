@@ -7,10 +7,9 @@ def false_position(fun_details: FunctionDetails):
 
     fx = fun_details.calc_function
 
-    if(fx(xl) * fx(xu) >= 0):
+    if fx(xl) * fx(xu) >= 0:
         print("Error: f(xl) and f(xu) have the same sign")
         return
-    
 
     count = 0
     error = 100

@@ -33,10 +33,10 @@ def read_from_file():
 
 
 def submit():
-
     # TODO: TAKE INITIAL GUESS FROM THE GUI
     initial_guess = 0
-    fun_details = FunctionDetails(function.get(), float(precision.get()), int(max_iterations.get()), initial_guess1.get(), initial_guess2.get())
+    fun_details = FunctionDetails(function.get(), float(precision.get()), int(max_iterations.get()),
+                                  initial_guess1.get(), initial_guess2.get())
 
     if chosen.get() == 'Bisection':
         xr = bisection(fun_details)
@@ -53,13 +53,15 @@ def submit():
     else:
         print("Invalid")
 
+
 initialGuess1Label = Label(root, text="Initial Guess 1:")
 initialGuess1Entry = Entry(root, width=30, textvariable=initial_guess1)
 initialGuess2Label = Label(root, text="Initial Guess 2:")
 initialGuess2Entry = Entry(root, width=30, textvariable=initial_guess2)
 
+
 def showInitialGuess(chosen):
-    if(chosen == 'Bisection' or chosen == 'False Position'):
+    if chosen == 'Bisection' or chosen == 'False Position':
         initialGuess1Label.grid(row=3, column=0)
         initialGuess1Entry.grid(row=3, column=1)
         initialGuess2Label.grid(row=3, column=2)
@@ -69,6 +71,7 @@ def showInitialGuess(chosen):
         initialGuess2Entry.grid_remove()
         initialGuess1Label.grid_remove()
         initialGuess2Label.grid_remove()
+
 
 showInitialGuess(chosen.get())
 
