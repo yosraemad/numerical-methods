@@ -27,6 +27,8 @@ class FunctionDetails:
     def add_iteration_result(self, iteration: int, x_prev: float, x: float, fx: float, error: float, details):
         result_string = "Iteration: {}, Xi: {}, Xi+1: {}, F(Xi+1): {}, Error: {}, {}"\
             .format(iteration, x_prev, x, fx, error, details)
+
+        # TODO: REMOVE, This Print is only for testing purposes
         print(result_string)
         self.result_arr.append(result_string)
 
