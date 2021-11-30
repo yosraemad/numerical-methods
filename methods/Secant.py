@@ -1,7 +1,8 @@
 from function_details import calc_relative_error, FunctionDetails
-
+import time
 
 def secant(fun_details: FunctionDetails):
+    start_time = time.time()
     precision = fun_details.precision
     max_iterations = fun_details.max_iterations
     xl = fun_details.initial_guess1
@@ -28,4 +29,6 @@ def secant(fun_details: FunctionDetails):
         xu = x
         xold = x
 
+    end_time = time.time()
+    fun_details.showResult("Secant", start_time - end_time)
     return x

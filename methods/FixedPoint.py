@@ -1,7 +1,8 @@
 from function_details import calc_relative_error, FunctionDetails
-
+import time
 
 def fixed_point(fun_details: FunctionDetails):
+    start_time = time.time()
     precision = fun_details.precision
     max_iterations = fun_details.max_iterations
     xold = fun_details.initial_guess1
@@ -17,4 +18,6 @@ def fixed_point(fun_details: FunctionDetails):
         count += 1
         xold = x
 
+    end_time = time.time()
+    fun_details.showResult("Fixed Point", end_time - start_time)
     return x
