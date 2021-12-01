@@ -7,11 +7,10 @@ def calc_relative_error(x_old: float, x_new: float):
 
 class FunctionDetails:
 
-    def __init__(self, function_string, g_function_string, precision, max_iterations, initial_guess1=None, initial_guess2=None):
+    def __init__(self, function_string, precision, max_iterations, initial_guess1=None, initial_guess2=None):
         self.function_string = function_string
         if(precision == 0):
             self.precision = 0.01
-        self.g_function_string = g_function_string
         self.precision = precision
         if(max_iterations == 0):
             self.max_iterations = 20
@@ -25,7 +24,7 @@ class FunctionDetails:
         return eval(fun_with_val)
 
     def calc_g_function(self, x: float):
-        fun_with_val = self.g_function_string
+        fun_with_val = self.initial_guess2
         return eval(fun_with_val)
 
     def diff_f_at_point(self, x: float):
