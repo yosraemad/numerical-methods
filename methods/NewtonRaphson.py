@@ -4,7 +4,7 @@ import time
 def newton_raphson(fun_details: FunctionDetails):
     start_time = time.time()
     # TODO: USE THE INITIAL GUESS
-    x = fun_details.initial_guess1
+    x = float(fun_details.initial_guess1)
 
     count = 0
     error = 100

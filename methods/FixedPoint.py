@@ -5,7 +5,7 @@ def fixed_point(fun_details: FunctionDetails):
     start_time = time.time()
     precision = fun_details.precision
     max_iterations = fun_details.max_iterations
-    xold = fun_details.initial_guess1
+    xold = float(fun_details.initial_guess1)
     count = 0
     error = 100
     while count < max_iterations and error > precision:

@@ -3,8 +3,8 @@ import time
 
 def false_position(fun_details: FunctionDetails):
     start_time = time.time()
-    xl = fun_details.initial_guess1
-    xu = fun_details.initial_guess2
+    xl = float(fun_details.initial_guess1)
+    xu = float(fun_details.initial_guess2)
 
     fx = fun_details.calc_function
 
