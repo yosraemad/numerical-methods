@@ -3,6 +3,8 @@ from tkinter.filedialog import askopenfilename
 import sys
 from function_details import FunctionDetails
 
+
+
 sys.path.append('./methods')
 
 from Bisection import bisection
@@ -44,14 +46,11 @@ def submit():
         xr = false_position(fun_details)
     elif chosen.get() == 'Fixed Point':
         fixed_point(fun_details)
-        for i in range(fun_details.max_iterations):
-            Label(root, text=fun_details.result_arr[i]).grid(row=7+i, column=0)
-
     elif chosen.get() == 'Newton Raphson':
         newton_raphson(fun_details)
     elif chosen.get() == 'Secant':
         xr = secant(fun_details)
-        print(xr)
+        fun_details.plot_function()
     else:
         print("Invalid")
 
@@ -68,21 +67,32 @@ g_functionButton = Button(root, text="Choose a file", command=read_from_file)
 
 
 def showInitialGuess(chosen):
-    if chosen == 'Bisection' or chosen == 'False Position':
+    if chosen == 'Bisection' or chosen == 'False Position' or chosen == 'Secant':
         initialGuess1Label.grid(row=3, column=0)
         initialGuess1Entry.grid(row=3, column=1)
         initialGuess2Label.grid(row=3, column=2)
         initialGuess2Entry.grid(row=3, column=3)
-    elif chosen == 'Newton Raphson' or chosen == 'Secant':
+        g_functionLabel.grid_remove()
+        g_functionEntry.grid_remove()
+        g_functionButton.grid_remove()
+
+    elif chosen == 'Newton Raphson':
         initialGuess1Label.grid(row=3, column=0)
         initialGuess1Entry.grid(row=3, column=1)
         initialGuess2Label.grid_remove()
         initialGuess2Entry.grid_remove()
-    else:
-        initialGuess1Entry.grid_remove()
-        initialGuess2Entry.grid_remove()
-        initialGuess1Label.grid_remove()
+        g_functionLabel.grid_remove()
+        g_functionEntry.grid_remove()
+        g_functionButton.grid_remove()
+
+    else :
+        g_functionLabel.grid(row=1, column=0)
+        g_functionEntry.grid(row=1, column=1)
+        g_functionButton.grid(row=1, column=2)
+        initialGuess1Label.grid(row=3, column=0)
+        initialGuess1Entry.grid(row=3, column=1)
         initialGuess2Label.grid_remove()
+        initialGuess2Entry.grid_remove()
 
 
 showInitialGuess(chosen.get())
@@ -90,24 +100,23 @@ showInitialGuess(chosen.get())
 root.title("Behaviour of Numerical Methods")
 root.geometry("800x600")
 
+
 Label(root, text="Enter a function:").grid(row=0, column=0)
 Entry(root, width=60, textvariable=function).grid(row=0, column=1)
 Button(root, text="Choose a file", command=read_from_file).grid(row=0, column=2)
 
-g_functionLabel.grid(row=1, column=0)
-g_functionEntry.grid(row=1, column=1)
-g_functionButton.grid(row=1, column=2)
+
 
 Label(root, text="Choose a method").grid(row=2, column=0)
 OptionMenu(root, chosen, *options, command=showInitialGuess).grid(row=2, column=1)
 
 # TODO: MAKE SURE THAT THE USER CAN ONLY ENTER NUMBERS
-Label(root, text="Precision:").grid(row=3, column=0)
-Entry(root, width=30, textvariable=precision).grid(row=3, column=1)
+Label(root, text="Precision:").grid(row=4, column=0)
+Entry(root, width=30, textvariable=precision).grid(row=4, column=1)
 
-Label(root, text="Max Number of Iterations:").grid(row=3, column=2)
-Entry(root, width=30, textvariable=max_iterations).grid(row=3, column=3)
+Label(root, text="Max Number of Iterations:").grid(row=4, column=2)
+Entry(root, width=30, textvariable=max_iterations).grid(row=4, column=3)
 
-Button(root, text="Submit", command=submit).grid(row=5, column=0)
+Button(root, text="Submit", command=submit).grid(row=6, column=0)
 
 mainloop()

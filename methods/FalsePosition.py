@@ -1,7 +1,9 @@
 from function_details import FunctionDetails, calc_relative_error
+import time
 
 
 def false_position(fun_details: FunctionDetails):
+    start_time = time.time()
     xl = fun_details.initial_guess1
     xu = fun_details.initial_guess2
 
@@ -37,4 +39,5 @@ def false_position(fun_details: FunctionDetails):
         count += 1
         x_prev = xr
 
+    fun_details.showResult("False Position", time.time() - start_time)
     return xr

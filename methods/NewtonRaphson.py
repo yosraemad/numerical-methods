@@ -1,7 +1,9 @@
 from function_details import FunctionDetails, calc_relative_error
+import time
 
 
 def newton_raphson(fun_details: FunctionDetails):
+    start_time = time.time()
     # TODO: USE THE INITIAL GUESS
     x = fun_details.initial_guess1
 
@@ -26,4 +28,5 @@ def newton_raphson(fun_details: FunctionDetails):
         count += 1
         x_prev = x
 
+    fun_details.showResult("Newton Raphson", time.time() - start_time)
     return x
