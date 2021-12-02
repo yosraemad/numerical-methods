@@ -2,6 +2,12 @@ from sympy import diff, symbols
 from output import Output
 
 def calc_relative_error(x_old: float, x_new: float):
+
+    if x_old == x_new == 0: return 0
+
+    if x_old == 0 or x_new == 0:
+        return float(abs(x_new - x_old) / abs(max(x_new, x_old)))
+
     return float(abs(x_new - x_old) / abs(x_new))
 
 
