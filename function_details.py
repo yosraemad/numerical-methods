@@ -1,6 +1,6 @@
 from sympy import diff, symbols
 from output import Output
-from math import cos, sin, tan
+from math import cos, sin, tan, exp
 
 
 def calc_relative_error(x_old: float, x_new: float):
