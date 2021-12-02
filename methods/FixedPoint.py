@@ -15,6 +15,8 @@ def fixed_point(fun_details: FunctionDetails):
         details = ""
         fun_details.add_iteration_result(count, xold, x, fx, error, details)
 
+        if fx == 0:
+            return x
         count += 1
         xold = x
 

@@ -5,8 +5,8 @@ def secant(fun_details: FunctionDetails):
     start_time = time.time()
     precision = fun_details.precision
     max_iterations = fun_details.max_iterations
-    xl = fun_details.initial_guess1
-    xu = fun_details.initial_guess2
+    xl = float(fun_details.initial_guess1)
+    xu = float(fun_details.initial_guess2)
     xold = 0
     count = 0
     error = 100
@@ -23,6 +23,8 @@ def secant(fun_details: FunctionDetails):
         details = "Xu: {}, Xl: {}".format(xu, xl)
         fun_details.add_iteration_result(count, xold, x, fx, error, details)
 
+        if fx == 0:
+            return x
         count += 1
         xl = xu
         xu = x
