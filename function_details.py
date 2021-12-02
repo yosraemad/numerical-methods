@@ -1,6 +1,5 @@
-from sympy import diff, symbols, sympify
+from sympy import diff, symbols
 from output import Output
-from sympy.plotting import plot
 
 def calc_relative_error(x_old: float, x_new: float):
     return float(abs(x_new - x_old) / abs(x_new))
@@ -8,14 +7,12 @@ def calc_relative_error(x_old: float, x_new: float):
 
 class FunctionDetails:
 
-    def __init__(self, function_string, g_function_string, precision, max_iterations, initial_guess1=None,
-                 initial_guess2=None):
+    def __init__(self, function_string, precision, max_iterations, initial_guess1=None, initial_guess2=None):
         self.function_string = function_string
-        if (precision == 0):
+        if(precision == 0):
             self.precision = 0.01
-        self.g_function_string = g_function_string
         self.precision = precision
-        if (max_iterations == 0):
+        if(max_iterations == 0):
             self.max_iterations = 20
         self.max_iterations = max_iterations
         self.initial_guess1 = initial_guess1
@@ -27,7 +24,7 @@ class FunctionDetails:
         return eval(fun_with_val)
 
     def calc_g_function(self, x: float):
-        fun_with_val = self.g_function_string
+        fun_with_val = self.initial_guess2
         return eval(fun_with_val)
 
     def diff_f_at_point(self, x: float):
@@ -36,7 +33,7 @@ class FunctionDetails:
         return eval(fun_with_val)
 
     def add_iteration_result(self, iteration: int, x_prev: float, x: float, fx: float, error: float, details):
-        result_string = "Iteration: {}, Xi: {}, Xi+1: {}, F(Xi+1): {}, Error: {}, {}" \
+        result_string = "Iteration: {}, Xi: {}, Xi+1: {}, F(Xi+1): {}, Error: {}, {}"\
             .format(iteration, x_prev, x, fx, error, details)
         temp_arr = [iteration, x_prev, x, fx, error, details]
         self.result_arr.append(temp_arr)
@@ -44,11 +41,3 @@ class FunctionDetails:
     def showResult(self, method_name, execution_time):
         result = Output(self.result_arr, method_name, execution_time)
         result.showOutput()
-        self.plot_function()
-
-    #TODO plot function
-    def plot_function(self):
-        exp = sympify(self.function_string)
-        plot(exp, -10, 10)
-
-
