@@ -1,12 +1,13 @@
 from tkinter import *
 from tkinter import ttk
 
+
 class Output:
-    def __init__ (self, result_arr, method_name, execution_time):
+    def __init__(self, result_arr, method_name, execution_time):
         self.result_arr = result_arr
         self.method_name = method_name
         self.execution_time = execution_time
-    
+
     def showOutput(self):
         root = Tk()
         root.title("Output of " + self.method_name)
@@ -35,10 +36,7 @@ class Output:
         result.heading("f(x)", text="F(X)", anchor=CENTER)
         result.heading("error", text="Error", anchor=CENTER)
 
-
         for i in range(len(self.result_arr)):
             result.insert(parent='', index='end', iid=i, values=self.result_arr[i])
         result.pack()
         root.mainloop()
-
-        

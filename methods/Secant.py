@@ -7,13 +7,12 @@ def secant(fun_details: FunctionDetails):
     max_iterations = fun_details.max_iterations
     xl = float(fun_details.initial_guess1)
     xu = float(fun_details.initial_guess2)
-    fxu = fun_details.calc_function(xu)
-    fxl = fun_details.calc_function(xl)
     xold = 0
     count = 0
     error = 100
     while count < max_iterations and error > precision:
-
+        fxu = fun_details.calc_function(xu)
+        fxl = fun_details.calc_function(xl)
         if fxu == fxl:
             print('Error! division by zero')
             break
@@ -24,6 +23,8 @@ def secant(fun_details: FunctionDetails):
         details = "Xu: {}, Xl: {}".format(xu, xl)
         fun_details.add_iteration_result(count, xold, x, fx, error, details)
 
+        if fx == 0:
+            return x
         count += 1
         xl = xu
         xu = x
