@@ -24,6 +24,8 @@ def secant(fun_details: FunctionDetails):
         fun_details.add_iteration_result(count, xold, x, fx, error, details)
 
         if fx == 0:
+            end_time = time.time()
+            fun_details.showResult("Secant", start_time - end_time)
             return x
         count += 1
         xl = xu

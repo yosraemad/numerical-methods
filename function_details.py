@@ -1,12 +1,13 @@
 from sympy import diff, symbols
 from output import Output
+from math import cos, sin, tan
+
 
 def calc_relative_error(x_old: float, x_new: float):
-
     if x_old == x_new == 0: return 0
 
     if x_old == 0 or x_new == 0:
-        return float(abs(x_new - x_old) / abs(max(x_new, x_old)))
+        return float(abs(x_new - x_old) / (max(abs(x_new), abs(x_old))))
 
     return float(abs(x_new - x_old) / abs(x_new))
 
@@ -15,10 +16,10 @@ class FunctionDetails:
 
     def __init__(self, function_string, precision, max_iterations, initial_guess1=None, initial_guess2=None):
         self.function_string = function_string
-        if(precision == 0):
+        if (precision == 0):
             self.precision = 0.01
         self.precision = precision
-        if(max_iterations == 0):
+        if (max_iterations == 0):
             self.max_iterations = 20
         self.max_iterations = max_iterations
         self.initial_guess1 = initial_guess1
@@ -39,7 +40,7 @@ class FunctionDetails:
         return eval(fun_with_val)
 
     def add_iteration_result(self, iteration: int, x_prev: float, x: float, fx: float, error: float, details):
-        result_string = "Iteration: {}, Xi: {}, Xi+1: {}, F(Xi+1): {}, Error: {}, {}"\
+        result_string = "Iteration: {}, Xi: {}, Xi+1: {}, F(Xi+1): {}, Error: {}, {}" \
             .format(iteration, x_prev, x, fx, error, details)
         temp_arr = [iteration, x_prev, x, fx, error, details]
         self.result_arr.append(temp_arr)
