@@ -15,7 +15,7 @@ class Output:
 
         number_of_iterations = len(self.result_arr)
         Label(root, text="Number of Iterations: {}".format(number_of_iterations)).pack()
-        Label(root, text="Execution Time: {}".format(self.execution_time)).pack()
+        Label(root, text="Execution Time: {:.15f}".format(self.execution_time)).pack()
         result_frame = Frame(root)
         result_frame.pack()
         result = ttk.Treeview(result_frame)

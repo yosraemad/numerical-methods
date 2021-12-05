@@ -33,5 +33,5 @@ def secant(fun_details: FunctionDetails):
         xold = x
 
     end_time = time.time()
-    fun_details.showResult("Secant", start_time - end_time)
+    fun_details.showResult("Secant", end_time - start_time)
     return x
