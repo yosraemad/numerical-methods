@@ -35,6 +35,7 @@ def bisection(fun_details: FunctionDetails):
         x_prev = xr
         count += 1
         fun_details.add_iteration_result(count, x_prev, xr, fr, error, "Xu: {}, Xl: {}, F(Xu): {}, F(Xl): {}".format(xu, xl, fu, fl))
-    
-    fun_details.showResult("Bisection", time.time() - start_time)
+
+    end_time = time.time()
+    fun_details.showResult("Bisection", end_time - start_time)
     return xr
