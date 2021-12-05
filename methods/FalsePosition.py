@@ -1,7 +1,12 @@
 from function_details import FunctionDetails, calc_relative_error
 import time
+import ctypes
+from random import random
 
 def false_position(fun_details: FunctionDetails):
+    if(fun_details.calc_function(random()) == None):
+        ctypes.windll.user32.MessageBoxW(0, "Please enter a valid function", "Error", 0)
+        return
     start_time = time.time()
     xl = float(fun_details.initial_guess1)
     xu = float(fun_details.initial_guess2)
