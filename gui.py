@@ -16,8 +16,11 @@ class Ui_MainWindow(object):
         if(self.initialGuess1Entry.text() == ''):
                 ctypes.windll.user32.MessageBoxW(0, "Please enter the initial guess", "Error", 0)
                 return
-        if(self.methodComboBox.currentText() != "Newton Raphson" and self.initialGuess2Entry.text() == ''):
+        if(self.methodComboBox.currentText() != "Newton Raphson"and self.methodComboBox.currentText() != "Fixed Point" and self.initialGuess2Entry.text() == ''):
                 ctypes.windll.user32.MessageBoxW(0, "Please enter the second initial guess", "Error", 0)
+                return
+        if (self.methodComboBox.currentText() == "Fixed Point" and self.initialGuess2Entry.text() == ''):
+                ctypes.windll.user32.MessageBoxW(0, "Please enter g(x)", "Error", 0)
                 return
         submit = Submit(self.functionEntry.text(), str(self.methodComboBox.currentText()), float(self.precisionEntry.text()), int(self.numberOfIterationsEntry.text()), self.initialGuess1Entry.text(), self.initialGuess2Entry.text())
 
