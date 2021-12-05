@@ -1,10 +1,24 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QFileDialog
 from submit import Submit
+import ctypes
 
 
 class Ui_MainWindow(object):
     def submit(self):
+        if(self.functionEntry.text() == ''):
+                ctypes.windll.user32.MessageBoxW(0, "Please enter a function", "Error", 0)
+                return
+        if(self.precisionEntry.text() == ''):
+                self.precisionEntry.setText("0.01")
+        if(self.numberOfIterationsEntry.text() == ''):
+                self.numberOfIterationsEntry.setText("20")
+        if(self.initialGuess1Entry.text() == ''):
+                ctypes.windll.user32.MessageBoxW(0, "Please enter the initial guess", "Error", 0)
+                return
+        if(self.methodComboBox.currentText() != "Newton Raphson" and self.initialGuess2Entry.text() == ''):
+                ctypes.windll.user32.MessageBoxW(0, "Please enter the second initial guess", "Error", 0)
+                return
         submit = Submit(self.functionEntry.text(), str(self.methodComboBox.currentText()), float(self.precisionEntry.text()), int(self.numberOfIterationsEntry.text()), self.initialGuess1Entry.text(), self.initialGuess2Entry.text())
 
     def read_from_file(self, MainWindow):
@@ -15,12 +29,14 @@ class Ui_MainWindow(object):
 
 
     def setupInitialGuessLabels(self):
+        self.initialGuess2Entry.show()
         if(self.methodComboBox.currentText() == "Fixed Point"):
             self.initialGuess1Label.setText("Initial Guess:")
             self.initialGuess2Label.setText("g(x)")
         elif(self.methodComboBox.currentText() == "Newton Raphson"):
             self.initialGuess1Label.setText("Initial Guess:")
             self.initialGuess2Label.setText("")
+            self.initialGuess2Entry.hide()
         elif(self.methodComboBox.currentText() == "Secant"):
             self.initialGuess1Label.setText("x_(i-1):")
             self.initialGuess2Label.setText("x_i:")

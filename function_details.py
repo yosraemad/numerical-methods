@@ -28,16 +28,25 @@ class FunctionDetails:
 
     def calc_function(self, x: float):
         fun_with_val = self.function_string
-        return eval(fun_with_val)
+        try:
+            return eval(fun_with_val)
+        except:
+            return None
 
     def calc_g_function(self, x: float):
         fun_with_val = self.initial_guess2
-        return eval(fun_with_val)
+        try:
+            return eval(fun_with_val)
+        except:
+            return None
 
     def diff_f_at_point(self, x: float):
         f_dash = diff(self.function_string, symbols('x'))
         fun_with_val = f_dash.__str__()
-        return eval(fun_with_val)
+        try:
+            return eval(fun_with_val)
+        except:
+            return None
 
     def add_iteration_result(self, iteration: int, x_prev: float, x: float, fx: float, error: float, details):
         result_string = "Iteration: {}, Xi: {}, Xi+1: {}, F(Xi+1): {}, Error: {}, {}" \
